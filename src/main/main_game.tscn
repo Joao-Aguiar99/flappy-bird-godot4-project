@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://cu07w4s2h2tlj"]
+
+[ext_resource type="Script" uid="uid://dyfxxw8uo3p6y" path="res://src/main/main_game.gd" id="1_v1whf"]
+[ext_resource type="AudioStream" uid="uid://jiwcm0gv0niy" path="res://assets/Sound Efects/die.ogg" id="2_osyoj"]
+[ext_resource type="Texture2D" uid="uid://b4ssx66jeyxo1" path="res://assets/Game Objects/bg.png" id="2_v1whf"]
+[ext_resource type="AudioStream" uid="uid://du8w57vknpbym" path="res://assets/Sound Efects/point.ogg" id="3_b1ych"]
+[ext_resource type="PackedScene" uid="uid://ckjs3b6sq3ia1" path="res://src/scenes/game_over.tscn" id="3_sdktl"]
+[ext_resource type="AudioStream" uid="uid://cr45stenaxi40" path="res://assets/Sound Efects/hit.ogg" id="4_bk6ur"]
+
+[node name="MainGame" type="Node" unique_id=1953809742]
+script = ExtResource("1_v1whf")
+
+[node name="Systems" type="Node" parent="." unique_id=785351354]
+
+[node name="PipeTimer" type="Timer" parent="Systems" unique_id=2128574092]
+wait_time = 1.5
+
+[node name="Sounds" type="Node" parent="." unique_id=1013149085]
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="Sounds" unique_id=507713745]
+stream = ExtResource("2_osyoj")
+
+[node name="ScoreAudio" type="AudioStreamPlayer" parent="Sounds" unique_id=360980097]
+stream = ExtResource("3_b1ych")
+
+[node name="HitPipe" type="AudioStreamPlayer" parent="Sounds" unique_id=1816984627]
+stream = ExtResource("4_bk6ur")
+
+[node name="MainLevel" type="Node2D" parent="." unique_id=1708616902]
+
+[node name="TextureRect" type="Sprite2D" parent="MainLevel" unique_id=242226639]
+position = Vector2(432, 384)
+texture = ExtResource("2_v1whf")
+
+[node name="Hud" type="CanvasLayer" parent="." unique_id=704879641]
+
+[node name="Score" type="Label" parent="Hud" unique_id=118944877]
+z_index = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -34.5
+offset_right = 34.5
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "SCORE: 0"
+
+[node name="GameOver" parent="." unique_id=1400131303 instance=ExtResource("3_sdktl")]
+
+[connection signal="timeout" from="Systems/PipeTimer" to="." method="_on_pipe_timer_timeout"]
+[connection signal="restart" from="GameOver" to="." method="_on_game_over_restart"]

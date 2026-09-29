@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://d10oihjl1a5u4"]
+
+[ext_resource type="Texture2D" uid="uid://b6bjv36uaw6ar" path="res://assets/Game Objects/pipe.png" id="1_xe5rx"]
+[ext_resource type="Script" uid="uid://cft1u6v3xq8sf" path="res://src/entities/pipe.gd" id="1_y0lgb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y0lgb"]
+size = Vector2(72, 524)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g77v3"]
+size = Vector2(78, 35.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4yy5s"]
+size = Vector2(78, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqakf"]
+size = Vector2(72, 524)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jyfqy"]
+size = Vector2(25, 206)
+
+[node name="Pipe" type="Area2D" unique_id=1593601814 groups=["pipes"]]
+script = ExtResource("1_y0lgb")
+
+[node name="Upper" type="Sprite2D" parent="." unique_id=1025630176]
+rotation = 3.1415927
+texture = ExtResource("1_xe5rx")
+offset = Vector2(0, 380)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=809925518]
+position = Vector2(0, -399)
+shape = SubResource("RectangleShape2D_y0lgb")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=800072922]
+position = Vector2(0, -118.875)
+shape = SubResource("RectangleShape2D_g77v3")
+
+[node name="Lower" type="Sprite2D" parent="." unique_id=1070140481]
+position = Vector2(0, 688)
+texture = ExtResource("1_xe5rx")
+offset = Vector2(0, -380)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="." unique_id=793922266]
+position = Vector2(0, 46)
+shape = SubResource("RectangleShape2D_4yy5s")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="." unique_id=726219758]
+position = Vector2(0, 326)
+shape = SubResource("RectangleShape2D_hqakf")
+
+[node name="ScoreArea" type="Area2D" parent="." unique_id=815280033]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreArea" unique_id=1159379864]
+position = Vector2(52, -42)
+shape = SubResource("RectangleShape2D_jyfqy")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="ScoreArea" to="." method="_on_score_area_body_entered"]

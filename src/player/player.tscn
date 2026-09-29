@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://boqnksvmkwm5b"]
+
+[ext_resource type="Script" uid="uid://b7q41qqanla0w" path="res://src/player/player.gd" id="1_rxibo"]
+[ext_resource type="Texture2D" uid="uid://c5anhx7sswora" path="res://assets/Game Objects/bird1.png" id="2_244u8"]
+[ext_resource type="Texture2D" uid="uid://dbk7he84oob5r" path="res://assets/Game Objects/bird2.png" id="3_5f2sf"]
+[ext_resource type="Texture2D" uid="uid://b2ky53ebtjih0" path="res://assets/Game Objects/bird3.png" id="4_jiejy"]
+[ext_resource type="AudioStream" uid="uid://ca851igi8cwgq" path="res://assets/Sound Efects/wing.ogg" id="5_5f2sf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jyfqy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_244u8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_5f2sf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jiejy")
+}],
+"loop": 1,
+"name": &"flying",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_emv0s"]
+radius = 17.0
+height = 50.0
+
+[node name="Player" type="CharacterBody2D" unique_id=1194672896]
+script = ExtResource("1_rxibo")
+
+[node name="Flappy" type="AnimatedSprite2D" parent="." unique_id=1014530599]
+sprite_frames = SubResource("SpriteFrames_jyfqy")
+animation = &"flying"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1873706838]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_emv0s")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1463761745]
+stream = ExtResource("5_5f2sf")
